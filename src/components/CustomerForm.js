@@ -7,9 +7,13 @@ const CustomerForm = () => {
   const [form, setForm] = useState({ name: '', address: '', contact: '' });
   const [customers, setCustomers] = useState([]);
 
+  const handleChange = (e) => {
+    setForm({ ...form, [e.target.name]: e.target.value });
+  };
+
   const fetchCustomers = async () => {
     try {
-      const res = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/api/customers`);
+     const res = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/api/customers`);
       setCustomers(res.data);
     } catch (err) {
       console.error('Error fetching customers:', err);
@@ -17,14 +21,10 @@ const CustomerForm = () => {
     }
   };
 
-  const handleChange = (e) => {
-    setForm({ ...form, [e.target.name]: e.target.value });
-  };
-
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await axios.post('/api/customers', form);
+      await axios.post( `${process.env.REACT_APP_BACKEND_URL}/api/customers`,form );
       setForm({ name: '', address: '', contact: '' });
       fetchCustomers();
     } catch (err) {
@@ -34,11 +34,7 @@ const CustomerForm = () => {
 
   useEffect(() => {
     fetchCustomers();
-
-  
     const interval = setInterval(fetchCustomers, 5000);
-
-
     return () => clearInterval(interval);
   }, []);
 

@@ -8,21 +8,25 @@ const Reports = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
 
-  const fetchReports = async () => {
-    setLoading(true);
-    setError('');
-    try {
-      const daily = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/api/reports/daily`);
-      const monthly = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/api/reports/monthly`);
-      setDailyReport(daily.data);
-      setMonthlyReport(monthly.data);
-    } catch (err) {
-      console.error('Error fetching reports:', err);
-      setError('Failed to load reports.');
-    } finally {
-      setLoading(false);
-    }
-  };
+ const fetchReports = async () => {
+  setLoading(true);
+  setError('');
+  try {
+    const daily = await axios.get(`${process.env.REACT_APP_API_URL}/api/reports/daily`);
+    const monthly = await axios.get(`${process.env.REACT_APP_API_URL}/api/reports/monthly`);
+    console.log("👉 Fetching DAILY from:", daily);
+    console.log("👉 Fetching MONTHLY from:", monthly);
+
+    setDailyReport(daily.data);
+    setMonthlyReport(monthly.data);
+  } catch (err) {
+    console.error('Error fetching reports:', err);
+    setError('Failed to load reports.');
+  } finally {
+    setLoading(false);
+  }
+};
+
 
   useEffect(() => {
     fetchReports();

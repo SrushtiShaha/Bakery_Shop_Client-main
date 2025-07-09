@@ -1,4 +1,4 @@
-import React from 'react';
+import React , { useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import ProductForm from './components/ProductForm';
@@ -9,9 +9,15 @@ import Ledger from './components/Ledger';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Dashboard from './components/Dashboard';
+//import React, { useEffect } from 'react';
 
 
 function App() {
+  useEffect(() => {
+  localStorage.clear();
+  sessionStorage.clear();
+}, []);
+
   return (
     <Router>
       <Navbar />

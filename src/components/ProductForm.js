@@ -307,7 +307,7 @@ import { Modal, Button, Spinner } from 'react-bootstrap';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 //axios.defaults.baseURL = "http://localhost:5000/api";
-axios.defaults.baseURL = "http://localhost:5000";
+axios.defaults.baseURL = "http://localhost:10000";
 
 
 const ProductForm = () => {
